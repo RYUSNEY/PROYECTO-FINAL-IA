@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Columna de 6/12 para el formulario y la respuesta -->
+        <div class="col-md-6">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4>Formulario de Denuncia</h4>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="mensaje">Ingrese su mensaje</label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+            {% if resultado %}
+                {% if resultado.error %}
+                    <div class="alert alert-danger mt-4" role="alert">
+                        {{ resultado.error }}
+                    </div>
+                {% else %}
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Respuesta del Chatbot</h5>
+                            <div class="response-content">
+                                <p><strong>Ciudad:</strong> {{ resultado.ciudad }}</p>
+                                <p><strong>Tipo de denuncia:</strong> {{ resultado.tipo_denuncia }}</p>
+                                <p><strong>Modalidad:</strong> {{ resultado.modalidad }}</p>
+                                <p><strong>Comisaría:</strong> {{ resultado.comisaria.nombre }}</p>
+                                <p><strong>Dirección:</strong> {{ resultado.comisaria.direccion }}</p>
+                                <p><strong>Respuesta:</strong> {{ resultado.respuesta }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <!-- Columna de 6/12 para el mapa -->
+        <div class="col-md-6">
+            <div class="card mt-4">
+                <div class="card-body p-0">
+                    <h5>Mapa de calor de denuncias</h5>
+                    <iframe src="{{ url_for('mapa') }}" width="100%" height="500" frameborder="0" style="border:0;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
