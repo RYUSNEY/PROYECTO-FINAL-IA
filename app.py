@@ -7,7 +7,7 @@ from folium.plugins import HeatMap
 app = Flask(__name__)
 
 # Configura tu clave de API de OpenAI
-api_key = 'sk-proj-CwDMh5OWyk10N3IgSyAPT3BlbkFJ9HPDxOekd1bu9dVNwk2s'
+api_key = 'Pones tu API guapo'
 client = openai.OpenAI(api_key=api_key)
 
 # Leer el archivo CSV
